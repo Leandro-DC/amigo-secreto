@@ -22,7 +22,7 @@ TECNOLOGÍAS USADAS
 INSTALACIÓN / USO
 1. Clonar el repositorio:
    ```bash
-   git clone 
+   git clone https://github.com/Leandro-DC/amigo-secreto.git
 
 2. Abrir el archivo index.html en tu navegador.
 
