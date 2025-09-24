@@ -68,7 +68,9 @@ function actulizarLista() {
 
 //IMPLEMENTA UNA FUNCIÓN PARA SORTEAR LOS AMIGOS
 
-/*VALIDAR QUE HAYA AMIGOS DISPONIBLES: Antes de sortear, comprobar si el array amigos no está vacío.*/
+/*VALIDAR QUE HAYA AMIGOS DISPONIBLES: Antes de sortear, comprobar si el array amigos no está vacío.
+-Agrego un alert al if por si no hay nombres ingresados.
+-Agrego un else if con un alert, para anunciar que haya al menos 2 participantes para el sorteo*/
 
 /*GENERAR UN ÍNDICE ALEATORIO: Usar Math.random() y Math.floor() para seleccionar un índice aleatorio 
 del arreglo.*/
@@ -82,6 +84,10 @@ e innerHTML para mostrar el amigo sorteado.*/
 function sortearAmigo() {
 
     if (amigos.length === 0) {
+        alert("Ingrese nombres de sus amigos para sortear!");
+        return;
+    } else if(amigos.length < 2) {
+        alert("Se necesitan, minimo 2 nombres para sortear!")
         return;
     }
 
