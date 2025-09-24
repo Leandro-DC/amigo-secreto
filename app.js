@@ -17,19 +17,38 @@ Si está vacío, mostrar un alert con un mensaje de error: "Por favor, inserte u
 
 /*ACTUALIZAR EL ARRAY DE AMIGOS: Si el valor es válido, añadirlo al arreglo que almacena los nombre 
 de amigos usando el método.push().
--agrego */
+-agrego, amigos.push(nombreIngresado);*/
 
 /*LIMPIAR EL CAMPO DE ENTRADA: Después de añadir el nombre, restablecer el campo de texto a una cadena vacía.
 -creo funcion limpiarCaja 
 -agrego limpiarCaja dentro de funcion agregarAmigos*/
 
+//NUEVAS FUNCIONALIDADES
+//Agrego regex para que solo tome letras el cuadro de Escribe un Nombre, idea del Live Mentoria Challenge Amigo Secreto.
+//Agrego para que no se pueda repetir nombres en el sorteo, gracias a chatGPT.
+
 function agregarAmigo() {
     let nombreIngresado = ((document.getElementById("amigo").value)).trim();
     console.log(nombreIngresado);
+
     if (nombreIngresado === "") {
-        alert("Por favor, inserte un nombre.");
+        alert("Por favor, inserte un nombre!");
         return;
     }
+
+    let regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    if (!regex.test(nombreIngresado)) {
+        alert('El nombre solo puede contener letras!');
+        return;
+    }
+
+    let nombreMinusculas = nombreIngresado.toLowerCase();
+    let yaExiste = amigos.some(amigo => amigo.toLowerCase() === nombreMinusculas);
+    if (yaExiste) {
+        alert('Este nombre ya fue ingresado!');
+        return;
+    }
+
     amigos.push(nombreIngresado);
     console.log(amigos);
     limpiarCaja();
@@ -87,7 +106,7 @@ function sortearAmigo() {
         alert("Ingrese nombres de sus amigos para sortear!");
         return;
     } else if(amigos.length < 2) {
-        alert("Se necesitan, minimo 2 nombres para sortear!")
+        alert("Se necesitan, minimo 2 nombres para sortear!");
         return;
     }
 
@@ -96,4 +115,16 @@ function sortearAmigo() {
 
     let resultadoSorteo = document.getElementById("resultado");
     resultadoSorteo.innerHTML = `Tu amigo secreto es ${amigoSecreto}!`;
+    return;
 }
+
+//NUEVAS FUNCIONALIDADES CON AYUDA DE CHAT GPT.
+//Poder ingresar el nombre con el botón Enter al termninar de escribir.
+
+let inputAmigo = document.getElementById("amigo");
+
+inputAmigo.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        agregarAmigo();
+    }
+});
